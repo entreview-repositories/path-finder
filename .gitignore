@@ -1,0 +1,18 @@
+node_modules/
+src/generated/
+data/
+.env
+__pycache__/
+
+# Local files and build output
+.env.*
+!.env.example
+!.env.*.example
+.tools/
+.cache/
+coverage/
+dist/
+*.log
+*.bak
+.DS_Store
+Thumbs.db

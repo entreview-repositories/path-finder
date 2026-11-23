@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id          Int    @id @default(autoincrement())
+  name        String
+  email       String @unique
+  preferences String @default("{}")
+  maps        Map[]
+}
+
+model Map {
+  id        Int @id @default(autoincrement())
+  name      String
+  width     Int
+  height    Int
+  userId    Int
+  version   Int @default(0)
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  obstacles Obstacle[]
+  waypoints Waypoint[]
+  routes    Route[]
+}
+
+model Obstacle {
+  id    Int @id @default(autoincrement())
+  mapId Int
+  x     Int
+  y     Int
+  map   Map @relation(fields: [mapId], references: [id], onDelete: Cascade)
+  @@unique([mapId, x, y])
+}
+
+model Waypoint {
+  id       Int @id @default(autoincrement())
+  mapId    Int
+  x        Int
+  y        Int
+  name     String
+  position Int
+  map      Map @relation(fields: [mapId], references: [id], onDelete: Cascade)
+  @@unique([mapId, position])
+  @@unique([mapId, x, y])
+}
+
+model Route {
+  id            Int @id @default(autoincrement())
+  mapId         Int
+  startX        Int
+  startY        Int
+  endX          Int
+  endY          Int
+  path          String
+  distance      Int
+  visitedCount  Int
+  createdAt     DateTime @default(now())
+  map           Map @relation(fields: [mapId], references: [id], onDelete: Cascade)
+}

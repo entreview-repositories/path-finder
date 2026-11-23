@@ -1,0 +1,29 @@
+{
+  "name": "path-finder-capstone",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "start": "node app.js",
+    "desktop": "node scripts/launch-desktop.js desktop.js",
+    "test": "node --test --experimental-test-coverage --test-coverage-lines=70 --test-coverage-functions=70 --test-coverage-include=src/**/*.js",
+    "test:performance": "node scripts/benchmark.js",
+    "test:desktop": "node scripts/launch-desktop.js scripts/smoke-desktop.js",
+    "format": "prettier --write \"{src,ui,test,scripts}/**/*.{js,ts,html,css}\" \"*.{js,json}\"",
+    "format:check": "prettier --check \"{src,ui,test,scripts}/**/*.{js,ts,html,css}\" \"*.{js,json}\""
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "express": "5.3.0"
+  },
+  "devDependencies": {
+    "electron": "45.3.1",
+    "prisma": "7.10.1",
+    "prettier": "3.10.1"
+  }
+}

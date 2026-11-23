@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Path Finder · Programming 4</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">⌘</div>
+        <div>
+          <h1>Path Finder</h1>
+          <span>ROUTE EXPLORER / 04</span>
+        </div>
+      </div>
+      <span class="header-tag">Explore. Connect. Find your way.</span>
+    </header>
+    <main>
+      <aside>
+        <div>
+          <h2>1. Workspace</h2>
+          <label for="users">User</label
+          ><select id="users">
+            <option value="">Select a user</option>
+          </select>
+        </div>
+        <details>
+          <summary>User details</summary>
+          <label for="username">Name</label><input id="username" value="Demo student" /><label
+            for="email"
+            >Email</label
+          ><input id="email" value="demo@example.com" type="email" />
+          <div class="row">
+            <button id="new-user">Create</button><button id="save-user">Update</button
+            ><button id="delete-user" class="danger">Delete</button>
+          </div>
+          <label for="avoid">Avoid cells (JSON coordinates)</label
+          ><textarea id="avoid" rows="2">[]</textarea
+          ><button id="save-preferences">Save preferences</button>
+        </details>
+        <div>
+          <h2>2. Map</h2>
+          <label for="maps">Saved maps</label
+          ><select id="maps">
+            <option value="">Select a map</option></select
+          ><label for="mapname">Name</label><input id="mapname" value="Demo map" />
+          <div class="row">
+            <div>
+              <label for="width">Width (2–100)</label
+              ><input id="width" type="number" min="2" max="100" value="10" />
+            </div>
+            <div>
+              <label for="height">Height (2–100)</label
+              ><input id="height" type="number" min="2" max="100" value="10" />
+            </div>
+          </div>
+          <div class="row">
+            <button id="new-map">Create</button><button id="save-map">Update</button
+            ><button id="delete-map" class="danger">Delete</button>
+          </div>
+        </div>
+        <button id="demo" class="primary">Create sample workspace</button>
+        <small
+          >Creates a new map with obstacles and one waypoint. Existing maps are preserved.</small
+        >
+        <div>
+          <h2>3. Search</h2>
+          <p class="hint">
+            Set start and destination on the grid. Add at least one waypoint; numbers define the
+            visiting order.
+          </p>
+          <button id="solve" class="primary">Find and save shortest route</button>
+        </div>
+        <div>
+          <label for="routes">Saved routes</label
+          ><select id="routes">
+            <option value="">Select a route</option></select
+          ><button id="delete-route">Delete selected route</button>
+        </div>
+        <small
+          >Map edits remove old routes. Coordinates start at (0, 0); movement uses four
+          directions.</small
+        >
+      </aside>
+      <section>
+        <div class="editor-heading">
+          <div>
+            <p class="eyebrow">THE WORKBENCH</p>
+            <h2>Every route starts with a map.</h2>
+          </div>
+          <span class="badge">4-direction grid</span>
+        </div>
+        <div class="tools" id="tools">
+          <button data-mode="start" class="selected">Start</button
+          ><button data-mode="end">Destination</button><button data-mode="obstacle">Obstacle</button
+          ><button data-mode="waypoint">Waypoint</button><button data-mode="erase">Erase</button>
+        </div>
+        <div id="canvas-wrap">
+          <canvas
+            id="grid"
+            width="600"
+            height="480"
+            aria-label="Editable path finding grid"
+          ></canvas>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background: #247449"></i>Start</span
+          ><span><i class="dot" style="background: #c25b38"></i>Destination</span
+          ><span><i class="dot" style="background: #d4a62d"></i>Waypoint</span
+          ><span><i class="dot" style="background: #344b41"></i>Obstacle</span
+          ><span><i class="dot" style="background: #abd9bd"></i>Route</span>
+        </div>
+        <div id="notice" role="status" aria-live="polite">
+          Create a sample workspace or select a saved map.
+        </div>
+        <div id="stats" aria-live="polite"></div>
+        <details>
+          <summary>What this demo teaches</summary>
+          <p class="hint">
+            The backend separates HTTP, services and Prisma repositories. Pure BFS uses a visited
+            set and an iterator. Ordered segments use bounded recursion. Small searches use bounded
+            memoization; large searches run in worker threads. Tests exercise the real SQLite
+            database and API.
+          </p>
+        </details>
+      </section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
